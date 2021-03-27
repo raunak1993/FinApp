@@ -20,11 +20,12 @@ const CardScreen = ({ navigation }) => {
     }
 
     const handleCardCreate = () => {
-        const cardNum = Math.floor(Math.random() * 1E16)
+        const cardNum = `${Math.floor(Math.random() * 1E16)}`
+        const expiryDate = `${Math.floor(Math.random() * 13)}/${Math.floor(Math.random() * 31)}`
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            dispatch(setCardDetails(cardNum, cardLimit))
+            dispatch(setCardDetails(cardNum, cardLimit, expiryDate))
             navigation.goBack()
         }, 1000)
     }

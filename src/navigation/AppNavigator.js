@@ -6,6 +6,7 @@ import CardScreen from "../screens/CardScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
 import Icon from '../components/Icon'
+import { Colors } from '../constants/index'
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,8 @@ const AppNavigator = (props) => {
             initialRouteName="Home"
             tabBarOptions={{
                 showLabel: false,
-                keyboardHidesTabBar: true
+                keyboardHidesTabBar: true,
+                activeTintColor: Colors.primary
             }}
         >
             <Tab.Screen

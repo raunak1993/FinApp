@@ -2,7 +2,8 @@ import { SET_CARD_DETAILS } from "../action/card";
 
 const initialState = {
     cardNumber: '',
-    cardLimit: ''
+    cardLimit: '',
+    expiryDate: ''
 };
 
 const cardReducer = (state = initialState, action) => {
@@ -10,8 +11,8 @@ const cardReducer = (state = initialState, action) => {
         case SET_CARD_DETAILS:
             return {
                 cardNumber: action.payload.cardNum,
-                cardLimit: action.payload.cardLimit
-
+                cardLimit: action.payload.cardLimit,
+                expiryDate: action.payload.expiryDate
             };
         default:
             return state;
