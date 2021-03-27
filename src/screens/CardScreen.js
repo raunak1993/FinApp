@@ -6,7 +6,7 @@ const CardScreen = () => {
     return (
         <View>
             <Text>
-                Card Screen
+                Create Virtual Card
             </Text>
         </View>
     );
