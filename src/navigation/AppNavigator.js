@@ -5,18 +5,44 @@ import HomeScreen from "../screens/HomeScreen";
 import CardScreen from "../screens/CardScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
-// import Colors from '../constants/Colors';
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from '../components/Icon'
 
 const Tab = createBottomTabNavigator();
+
+const TabBarIconConfig = ({ focused, color, size, icon }) => (
+    <Icon name={focused ? icon : `${icon}-outline`} size={size} color={color} />
+);
 
 
 const AppNavigator = (props) => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name='Home' component={HomeScreen} />
-            <Tab.Screen name='Card' component={CardScreen} />
-            <Tab.Screen name='Profile' component={ProfileScreen} />
+        <Tab.Navigator
+            initialRouteName="Home"
+            tabBarOptions={{
+                showLabel: false,
+            }}
+        >
+            <Tab.Screen
+                name='Home'
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: (props) => <TabBarIconConfig {...props} icon="home" />,
+                }}
+            />
+            <Tab.Screen
+                name='Card'
+                component={CardScreen}
+                options={{
+                    tabBarIcon: (props) => <TabBarIconConfig {...props} icon="card" />,
+                }}
+            />
+            <Tab.Screen
+                name='Profile'
+                component={ProfileScreen}
+                options={{
+                    tabBarIcon: (props) => <TabBarIconConfig {...props} icon="person" />,
+                }}
+            />
         </Tab.Navigator>
     );
 };
