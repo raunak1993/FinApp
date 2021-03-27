@@ -20,6 +20,7 @@ const AppNavigator = (props) => {
             initialRouteName="Home"
             tabBarOptions={{
                 showLabel: false,
+                keyboardHidesTabBar: true
             }}
         >
             <Tab.Screen

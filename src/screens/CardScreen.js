@@ -1,14 +1,34 @@
-import React from 'react';
-
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import Icon from "../components/Icon";
 import CARD_IMG from "../assets/card.png";
 import { Colors } from "../constants/index";
+import { setCardDetails } from "../action/card";
 
 const cardLimits = ['$1000', '$5000', '$10000', 'No Limit']
 
 const CardScreen = ({ navigation }) => {
+    const [cardLimit, setCardLimit] = useState()
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const { userName } = useSelector(state => state.user)
+
+    const handleCardLimit = (limit) => {
+        setCardLimit(limit)
+    }
+
+    const handleCardCreate = () => {
+        const cardNum = Math.floor(Math.random() * 1E16)
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            dispatch(setCardDetails(cardNum, cardLimit))
+            navigation.goBack()
+        }, 1000)
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.heading_box}>
@@ -32,22 +52,24 @@ const CardScreen = ({ navigation }) => {
                             <View style={styles.icon_box}>
                                 <Icon name='person' color={Colors.primary} size={20} />
                             </View>
-                            <TextInput style={styles.name_input} />
+                            <TextInput style={styles.name_input} value={userName} editable={false} underlineColorAndroid="transparent" />
                         </View>
                     </View>
                     <View style={styles.weekly_limit_box}>
                         <Text style={styles.label}>Card Weekly Limits</Text>
                         <View style={styles.limit_container}>
                             {
-                                cardLimits.map((limit, index) => <Text style={styles.limit_text} key={index}>{limit}</Text>)
+                                cardLimits.map((limit, index) => <Text style={[styles.limit_text, cardLimit === limit && styles.active_limit]} key={index} onPress={() => handleCardLimit(limit)}>{limit}</Text>)
                             }
                         </View>
                     </View>
                 </View>
             </View>
-            <TouchableOpacity style={styles.card_button_box}>
+            <TouchableOpacity style={styles.card_button_box} onPress={handleCardCreate}>
                 <Text style={styles.button_text}>
-                    Create Card
+                    {
+                        loading ? <ActivityIndicator color='white' /> : 'Create Card'
+                    }
                 </Text>
             </TouchableOpacity>
         </View>
@@ -73,9 +95,10 @@ const styles = StyleSheet.create({
         color: 'darkgrey'
     },
     card_box: {
+        elevation: 1,
         flexBasis: '70%',
         position: 'relative',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     card_image_box: {
         width: 120,
@@ -113,7 +136,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     name_input: {
-        flexBasis: '80%'
+        flexBasis: '80%',
+        color: 'black'
     },
     weekly_limit_box: {
         marginTop: 20
@@ -131,6 +155,10 @@ const styles = StyleSheet.create({
         padding: 10,
         textAlign: 'center',
         borderRadius: 10,
+        color: 'black'
+    },
+    active_limit: {
+        color: Colors.primary
     },
     card_button_box: {
         backgroundColor: Colors.primary,

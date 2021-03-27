@@ -1,5 +1,5 @@
 const initialState = {
-    userName: '',
+    userName: 'Raunak Tibrewal',
 };
 
 const cardReducer = (state = initialState, action) => {
