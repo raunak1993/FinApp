@@ -38,7 +38,6 @@ const Card = ({ cardNumber, expiryDate }) => {
 const styles = StyleSheet.create({
     container: {
         height: '68%',
-        paddingHorizontal: 10,
     },
     image: {
         width: '100%',

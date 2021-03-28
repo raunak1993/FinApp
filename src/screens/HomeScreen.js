@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import Card from "../components/Card";
+import ExpenseBar from "../components/ExpenseBar";
 import { Colors } from "../constants/index";
 
 const HomeScreen = () => {
     const { userName } = useSelector(state => state.user)
     const { cardNumber, cardLimit, expiryDate } = useSelector(state => state.card)
+    const { expenses } = useSelector(state => state.expense)
 
     return (
         <View style={styles.container}>
@@ -38,6 +40,25 @@ const HomeScreen = () => {
                 }
 
             </View>
+            <View style={styles.expense_container}>
+                {
+                    expenses.length > 0 ?
+                        <View>
+                            <Text style={styles.history_label}>History</Text>
+                            <FlatList
+                                data={expenses}
+                                keyExtractor={item => item.id}
+                                renderItem={(itemData) => <ExpenseBar label={itemData.item.label} amount={itemData.item.amount} date={itemData.item.date} />}
+                            />
+                        </View>
+                        :
+                        <View style={styles.no_card_box}>
+                            <Text style={styles.caption}>
+                                No expense added yet!
+                            </Text>
+                        </View>
+                }
+            </View>
         </View>
     );
 };
@@ -66,7 +87,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     limit_detail: {
-        margin: 10,
+        marginVertical: 10,
         marginTop: 15,
         padding: 15,
         backgroundColor: 'white',
@@ -81,6 +102,14 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    expense_container: {
+        flexBasis: '35%',
+        marginTop: 25
+    },
+    history_label: {
+        fontSize: 18,
+        fontWeight: "500"
     }
 })
 
