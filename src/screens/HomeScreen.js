@@ -9,7 +9,7 @@ import { Colors } from "../constants/index";
 const HomeScreen = () => {
     const { userName } = useSelector(state => state.user)
     const { cardNumber, cardLimit, expiryDate } = useSelector(state => state.card)
-    const { expenses } = useSelector(state => state.expense)
+    const { expenses, total_amount } = useSelector(state => state.expense)
 
     return (
         <View style={styles.container}>
@@ -29,7 +29,7 @@ const HomeScreen = () => {
                                 </View>
                                 <View style={styles.limit_detail}>
                                     <Text style={styles.label}>Monthly Spend</Text>
-                                    <Text>--</Text>
+                                    <Text>${total_amount}</Text>
                                 </View>
                             </View>
                         </View>
@@ -41,10 +41,10 @@ const HomeScreen = () => {
 
             </View>
             <View style={styles.expense_container}>
+                <Text style={styles.history_label}>History</Text>
                 {
                     expenses.length > 0 ?
                         <View>
-                            <Text style={styles.history_label}>History</Text>
                             <FlatList
                                 data={expenses}
                                 keyExtractor={item => item.id}

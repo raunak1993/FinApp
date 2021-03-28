@@ -26,7 +26,7 @@ const CardScreen = ({ navigation }) => {
         setTimeout(() => {
             setLoading(false)
             dispatch(setCardDetails(cardNum, cardLimit, expiryDate))
-            navigation.goBack()
+            navigation.navigate('Home')
         }, 1000)
     }
 

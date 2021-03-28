@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import CardScreen from "../screens/CardScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import ExpenseScreen from "../screens/ExpenseScreen";
 
 import Icon from '../components/Icon'
 import { Colors } from '../constants/index'
@@ -40,10 +40,10 @@ const AppNavigator = (props) => {
                 }}
             />
             <Tab.Screen
-                name='Profile'
-                component={ProfileScreen}
+                name='Expense'
+                component={ExpenseScreen}
                 options={{
-                    tabBarIcon: (props) => <TabBarIconConfig {...props} icon="person" />,
+                    tabBarIcon: (props) => <TabBarIconConfig {...props} icon="add" />,
                 }}
             />
         </Tab.Navigator>
