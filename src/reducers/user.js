@@ -1,16 +1,29 @@
+import { LOGIN, SIGN_UP } from "../action/auth";
+
 const initialState = {
-    userName: 'Raunak Tibrewal',
+    userName: '',
+    password: '',
+    isLoggedIn: false
+
 };
 
-const cardReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case SET_CARD_DETAILS:
-        //     return {
-        //         ...state,
-        //     };
+        case SIGN_UP:
+            return {
+                userName: action.payload.name,
+                password: action.payload.password,
+                isLoggedIn: true
+            };
+        case LOGIN:
+            return {
+                userName: action.payload.name,
+                password: action.payload.password,
+                isLoggedIn: true
+            }
         default:
             return state;
     }
 };
 
-export default cardReducer;
+export default userReducer;
