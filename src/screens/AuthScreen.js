@@ -20,7 +20,6 @@ class AuthScreen extends React.Component {
         this.state = {
             isSignUp: false,
             isLoading: false,
-            error: null,
             name: '',
             password: '',
         };
@@ -54,24 +53,26 @@ class AuthScreen extends React.Component {
         });
     };
 
-    authHandler = async () => {
+    authHandler = () => {
         const { name, password } = this.state;
         this.setState({
             isLoading: true,
-            error: null,
         });
 
-        try {
-            await (this.state.isSignUp
+        setTimeout(() => {
+            this.setState({
+                isLoading: false,
+            });
+            (this.state.isSignUp
                 ? this.props.signup(name, password)
                 : this.props.login(name, password));
-        } catch (err) {
-            this.setState({ error: err.message, isLoading: false });
-        }
+        }, 1000)
+
+
     };
 
     render() {
-        const { isSignUp, isLoading, name, password, error } = this.state;
+        const { isSignUp, isLoading, name, password } = this.state;
 
         return (
             <KeyboardAvoidingView style={styles.screen}>
@@ -109,11 +110,7 @@ class AuthScreen extends React.Component {
                         />
                     </View>
                 </View>
-                {error ? (
-                    <View style={styles.errMsg}>
-                        <Text style={styles.errText}>Error : {error}</Text>
-                    </View>
-                ) : null}
+
             </KeyboardAvoidingView>
         );
     }
