@@ -40,25 +40,28 @@ const HomeScreen = () => {
                 }
 
             </View>
-            <View style={styles.expense_container}>
-                <Text style={styles.history_label}>History</Text>
-                {
-                    expenses.length > 0 ?
-                        <View>
-                            <FlatList
-                                data={expenses}
-                                keyExtractor={item => item.id}
-                                renderItem={(itemData) => <ExpenseBar label={itemData.item.label} amount={itemData.item.amount} date={itemData.item.date} />}
-                            />
-                        </View>
-                        :
-                        <View style={styles.no_card_box}>
-                            <Text style={styles.caption}>
-                                No expense added yet!
+            {
+                cardNumber && <View style={styles.expense_container}>
+                    <Text style={styles.history_label}>History</Text>
+                    {
+                        expenses.length > 0 ?
+                            <View>
+                                <FlatList
+                                    data={expenses}
+                                    keyExtractor={item => item.id}
+                                    renderItem={(itemData) => <ExpenseBar label={itemData.item.label} amount={itemData.item.amount} date={itemData.item.date} />}
+                                />
+                            </View>
+                            :
+                            <View style={styles.no_card_box}>
+                                <Text style={styles.caption}>
+                                    No expense added yet!
                             </Text>
-                        </View>
-                }
-            </View>
+                            </View>
+                    }
+                </View>
+            }
+
         </View>
     );
 };

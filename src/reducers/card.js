@@ -1,7 +1,7 @@
 import { SET_CARD_DETAILS } from "../action/card";
 
 const initialState = {
-    cardNumber: '',
+    cardNumber: null,
     cardLimit: '',
     expiryDate: ''
 };
