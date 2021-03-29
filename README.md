@@ -11,7 +11,7 @@ Plugin's required to run this app :
 Steps to install and run the project :
 
 1. Clone the project repo using git clone in your local system.
-2. cd ./<ProjectName>
+2. cd ./ProjectName
 3. npm install
 4. npm start
 5. In another terminal at same path : react-native run-android
