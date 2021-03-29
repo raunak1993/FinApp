@@ -10,7 +10,7 @@ const Card = ({ cardNumber, expiryDate }) => {
     const { userName } = useSelector(state => state.user)
     return (
         <View style={styles.container}>
-            <ImageBackground style={styles.image} source={CARD_IMG} >
+            <ImageBackground style={styles.image} source={CARD_IMG} imageStyle={{ borderRadius: 10 }}>
                 <View style={styles.card_header}>
                     <View style={styles.chip_box}>
                         <Image style={styles.chip} source={CHIP_IMG} />

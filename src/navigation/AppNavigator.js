@@ -22,7 +22,11 @@ const AppNavigator = (props) => {
             tabBarOptions={{
                 showLabel: false,
                 keyboardHidesTabBar: true,
-                activeTintColor: Colors.primary
+                activeTintColor: Colors.primary,
+                style: {
+                    borderTopLeftRadius: 21,
+                    borderTopRightRadius: 21,
+                }
             }}
         >
             <Tab.Screen
